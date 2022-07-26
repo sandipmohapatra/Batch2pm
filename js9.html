@@ -1,0 +1,45 @@
+<html>
+<head>
+<script>
+var accno=prompt("Enter your accno");
+var name=prompt("Enter your name");
+var bal=prompt("Enter your balance");
+var choice=prompt("enter 1.deposite 2.withdraw 3.display");
+switch(parseInt(choice))
+{
+case 1: var x=prompt("Enter the amount to deposite");
+bal=parseInt(bal)+parseInt(x);
+document.write("The accno is "+accno);
+document.write("<br>");
+document.write("The name is "+name);
+document.write("<br>");
+document.write("The final balance is "+bal);
+break;
+case 2:var x=prompt("Enter the amount to withdraw");
+if(parseInt(bal)+1000 >x)
+{
+bal=bal-x;
+document.write("The accno is "+accno);
+document.write("<br>");
+document.write("The name is "+name);
+document.write("<br>");
+document.write("The final balance is "+bal);
+}
+else
+{
+document.write("insufficient Balance");
+}
+break;
+case 3:
+document.write("The accno is "+accno);
+document.write("<br>");
+document.write("The name is "+name);
+document.write("<br>");
+document.write("The final balance is "+bal);
+break;
+default:
+document.write("Invalid no");
+}
+</script>
+</head>
+</html>
