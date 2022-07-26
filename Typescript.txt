@@ -1,0 +1,41 @@
+Typescript
+--------------------
+1)It is developed by facebook.
+2)Our browser donot support typescript.
+3)We convert typescript to javascript after compilation.
+4)Angular js uses typescript as the scripting language.
+5)The datatype of javascript is var.Where as the datatype of typescript is let.
+--------------------------------------------------------------------------
+1)we have to install nodejs.
+https://nodejs.org/en/download/
+LTS 
+2)npm install -g typescript@latest
+3)notepad tsexample1.ts
+4)to compile :- tsc tsexample1.ts
+5)to run:- node tsexample1.js
+-----------------------------------------------------------------------------------
+example1:-
+console.log("Welcome to typescript ");
+console.log("at Pune");
+----------------------------------------------------------
+example 2:-
+tsexample2.ts
+--------------------------
+let username:string="sandip";
+let age:number=20;
+let address:string="Bangalore";
+console.log("Hello !"+ username +"  you will be "+(age+1)+ " next year ");
+console.log(`your address is ${address}`);
+----------------------------------------------------------------------------------
+after compilation it will become .js file
+-----------------------------------------------------------
+tsexample2.js
+---------------------------------
+var username = "sandip";
+var age = 20;
+var address = "Bangalore";
+console.log("Hello !" + username + "  you will be " + (age + 1) + "next year");
+console.log("your address is ".concat(address));
+-----------------------------------------------------------------------------------------
+
+
