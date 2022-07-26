@@ -1,0 +1,8 @@
+Javascript
+-------------------
+1)we have save the file by .html extention.
+2)Java script make our webpage dynamic.
+3)Java script is case sensitive.
+4)We have a datatype called var.
+5)Javascript support Oject Oriented programming .
+6)we have lot of pre-defined functions in javascript.We can also create user defined functions.
