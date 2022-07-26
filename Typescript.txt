@@ -1,6 +1,6 @@
 Typescript
 --------------------
-1)It is developed by facebook.
+1)It is developed by Microsoft.
 2)Our browser donot support typescript.
 3)We convert typescript to javascript after compilation.
 4)Angular js uses typescript as the scripting language.
