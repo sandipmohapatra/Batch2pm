@@ -1,41 +1,284 @@
 Typescript
+---------------------
+This was developed by facebook.Our browser doesnot support typescript so we have to convert it into javascript.
+The extention for typescript is .ts.where as the extention for javascript is .js.
+We have to compile the typescript and after compilation .ts is converted into .js .
+AngularJS use typescript as a scripting language. 
+data type of Typescript is let.where as the datatype of Javascript is var.
 --------------------
-1)It is developed by Microsoft.
-2)Our browser donot support typescript.
-3)We convert typescript to javascript after compilation.
-4)Angular js uses typescript as the scripting language.
-5)The datatype of javascript is var.Where as the datatype of typescript is let.
---------------------------------------------------------------------------
-1)we have to install nodejs.
-https://nodejs.org/en/download/
-LTS 
-2)npm install -g typescript@latest
-3)notepad tsexample1.ts
-4)to compile :- tsc tsexample1.ts
-5)to run:- node tsexample1.js
------------------------------------------------------------------------------------
-example1:-
-console.log("Welcome to typescript ");
-console.log("at Pune");
-----------------------------------------------------------
-example 2:-
-tsexample2.ts
---------------------------
-let username:string="sandip";
+example1.ts
+--------------------
+console.log("Welcome to typescript");
+console.log("At Be-practical");
+----------------------------
+step 1:- npm install -g typescript@latest
+--------------------------------------------------------------------------------------
+step 2:-
+to compile :- tsc example1.ts
+after compilation example1.js will be automatically created.
+--------------------------------------------------------------------------------------
+step 3:-
+to run :- node example1.js
+--------------------------------------------------------------------
+example2.ts
+--------------------
+function f1()
+{
+let x=10;
+let y;
+if(x==10)
+{
+ y=20;
+}
+console.log(`x=${x}\n y=${y}`);
+}
+
+f1();
+-------------------------------------------------------------
+After compilation the .js created is
+---------------------------------------------------
+function f1() {
+    var x = 10;
+    if (x == 10) {
+        var y = 20;
+    }
+    console.log("x=".concat(x, "\n y=").concat(y));
+}
+f1();
+-------------------------------------------------------------------------------------
+example3.ts
+------------------------
+let username:string="Rakshita";
 let age:number=20;
 let address:string="Bangalore";
-console.log("Hello !"+ username +"  you will be "+(age+1)+ " next year ");
-console.log(`your address is ${address}`);
-----------------------------------------------------------------------------------
-after compilation it will become .js file
------------------------------------------------------------
-tsexample2.js
----------------------------------
-var username = "sandip";
-var age = 20;
-var address = "Bangalore";
-console.log("Hello !" + username + "  you will be " + (age + 1) + "next year");
-console.log("your address is ".concat(address));
------------------------------------------------------------------------------------------
+console.log("Hello !"+"  "+username+"you be be "+(age+1) +"next year");
+console.log(`Your address is ${address}`);
+------------------------------------------------------------------------------------------------
+step 1:- npm install -g typescript@latest
+step 2:-notepad example1.ts
+step 3:-compile ----tsc example1.ts
+step 4:-to run ----node example1.js
+-----------------------------------------------------------------------------
+example-4
+-----------------
+var user="Sandip";
+var firstChar=user.charCodeAt(0);
+if(firstChar >=65 && firstChar <=90)
+{
+console.log("Hello ! "+user);
+}
+else
+{
+console.error("Error :Name must start with Uppercase Letter");
+}
+-------------------------------------------------------------------------------------------------
+example-5
+-------------------
+var x="These is typescript example";
+if(x.startsWith("This"))
+{
+console.log("The example is of Typescript");
+}
+else if(x.startsWith("These"))
+{
+console.log("The example is of Javascript");
+}
+else
+{
+console.log("The example is of  NodeJs");
+}
+------------------------------------------------------------------------------------
+example-6
+-------------------
+var x="This is typescript";
+if(x.endsWith("typescript"))
+{
+console.log("The example is of Typescript");
+}
+else if(x.endsWith("javascript"))
+{
+console.log("The example is of Javascript");
+}
+else
+{
+console.log("The example is of  NodeJs");
+}
+------------------------------------------------------------------------------
+example-7
+-----------------------
+var x="swarna@gmail.com";
+if(x.indexOf("@")==-1)
+{
+console.log("The email is invalid");
+}
+else
+{
+console.log("The email is valid");
+}
+----------------------------------------------------
+*-1 indicates not present
+----------------------------------------------------------------------------
+example-8
+----------------------
+let x:string="This is swarna's email swarna@gmail.com";
+if(x.includes("swarna"))
+{
+console.log("This is about swarna");
+}
+else if(x.includes("pratiksha"))
+{
+console.log("This is about pratiksha");
+}
+else
+{
+console.log("This is about other students");
+}
+-----------------------------------------------------------------------------------------------------------
+example-9
+------------------
+let x:string="SamsungTV,45000.34,InStock";
+let data:string[]=x.split(',');
+for(var value of data)
+{
+console.log(value);
+}
 
+console.log(`Name = ${data[0]}`);
+console.log(`Price = ${data[1]}`);
+console.log(`Instock Or Not = ${data[2]}`);
+------------------------------------------------------------------------
+example-10
+------------------------
+let password:string=" admin ";
+if(password.trim()=="admin")
+{
+console.log("correct password");
+}
+else
+{
+console.log("wrong password");
+}
 
+--------------------------------------------------------------------------------
+example-11
+----------------
+let Name="Samsung TV";
+let Price=45000.00;
+if (Price ==undefined)
+{
+console.log("Name ="+Name);
+}
+else
+{
+console.log("Name ="+Name+"\n Price= "+Price);
+}
+--------------------------------------------------------------------------------
+example-12
+----------------
+let Name:string|null = prompt("Enter your name");
+if (Name == null)
+{
+console.log("Name is Null");
+}
+else if(Name =="")
+{
+console.log("The name is empty");
+}
+else
+{
+console.log("Hello !" +Name);
+}
+----------------------------------------------------
+test12.html
+---------------------------
+<html>
+<head>
+<script src="example12.js"></script>
+</head>
+</html>
+---------------------------------------------------------------
+example-13
+-------------------
+let x:any[] = ["sandip","apple",1,[1,2,3,4],5];
+x[1] = "john";
+for(var item of x[3])
+{
+console.log(item);
+}
+console.log(x[0]);
+console.log(x[1]);
+console.log(x[2]);
+console.log(x[3]);
+console.log(x[4]);
+-----------------------------------------------------------------------------
+example-14
+---------------------
+let categories:string[] =["electronics","fashion","footwear"];
+
+function PrintList()
+{
+for(var property in categories)
+{
+console.log(`${property}:${categories[property]}`);
+}
+}
+
+PrintList();
+------------------------------------------------------------
+example-15
+-------------------
+interface IProduct
+{
+Name:string;
+Price:number;
+Instock:boolean;
+}
+
+function getdata<T>(object:T)
+{
+for(var property in object)
+{
+console.log(`${property} : ${object[property]}`);
+}
+}
+
+getdata<IProduct>({Name:'SamsungTV',Price :34000.00,Instock: true});
+
+getdata<IProduct>({Name:'Samsung Fridge',Price :44000.00,Instock: true});
+
+------------------------------------------------------------------------------------------------------------
+structure :- collection of different data types.
+Interface is same as structure in c.
+-----------------------------------------------------------------------
+example-16
+--------------------
+interface IProduct
+{
+Name:string;
+Price:number;
+Instock:boolean;
+}
+
+interface Employee
+{
+Name:string;
+Salary:number;
+Location:string;
+Age:number;
+}
+
+function getdata<T>(object:T)
+{
+for(var property in object)
+{
+console.log(`${property} : ${object[property]}`);
+}
+}
+
+getdata<IProduct>({Name:'SamsungTV',Price :34000.00,Instock: true});
+
+getdata<IProduct>({Name:'Samsung Fridge',Price :44000.00,Instock: true});
+
+getdata<Employee>({Name:'Ranjit',Salary :44000.00,Location: 'Chennei',Age:20});
+
+-------------------------------------------------------------------------------------------------
