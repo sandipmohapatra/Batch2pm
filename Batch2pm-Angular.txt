@@ -3,20 +3,21 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-myprofile',
   template: `
-  <p>My name is {{name}}</p>
+  <p>My name is {{name}}</p>  <-----{{}}  is interpolation
   <p>My email is {{email}}</p>
   <p>My address is {{address.street}} {{address.loc}} {{address.state}} {{address.city}}</p>
   <p><Button (click)="ShowDetails()">Show my Details</Button></p>
   <h3> My Hobbies are </h3>{{hobbies}}
   <h3> My daily Foods are </h3>
   <ul>
-  <li *ngFor="let food of foods">
+  <li *ngFor="let food of foods">  <---*ngFor,*ngIf  ----directives in angular--->
   {{food}}
   </li>
   </ul>
   `
 })
-export class MyprofileComponent {
+export class MyprofileComponent 
+{
 name:string;
 email:string;
 address:any;
@@ -42,6 +43,75 @@ constructor()
     console.log("My email is ",this.email);
     console.log("My address is ",this.address);
     
-  }
+  }}
 
+-----------------------------------------------------------------------------------------------------
+wap to display a list of purchase you have done this year using Amazon,flipcard,BigBazzar..etc....
+find the total cost.
+us *ngFor for displaying the products.
+--------------------------------------------------------------------------------------------------------
+Routing:-It helps in directing users to different pages.
+Hence based on the options they choose ,the page will render and open
+-----------------------------------------------------------------------------------------------------------------
+<outer-outlet></outer-outlet> 
+It will create memory block for the pages to render.
+-------------------------------------------------------------------------------------------------
+example-1
+-------------------
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-rout-demo',
+  template:`
+  Batch2PM
+  <ul>
+  <li><a [routerLink]="['/Login']">Login </a></li>
+  <li><a [routerLink]="['/Register']">Register </a></li>
+  <li><a [routerLink]="['/Details']">Details </a></li>
+   </ul><hr><hr>
+  <router-outlet></router-outlet>
+  ` 
+})
+export class RoutDemoComponent {
+ 
 }
+------------------------------------------------------------------------------------------------------
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule,Routes } from '@angular/router';  <------------------------------------
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
+import { RoutDemoComponent } from './rout-demo/rout-demo.component';
+
+const appRoutes:Routes=[  <------------------------------------------
+{ path:'Login',component:AppComponent},
+{ path:'Register',component:RegistrationComponent},
+{ path:'Details',component:MyprofileComponent},
+]
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    RegistrationComponent,
+    MyprofileComponent,
+    RoutDemoComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule.forRoot(appRoutes) <---------------------------------------
+  ],
+  providers: [],
+  bootstrap: [RoutDemoComponent]  <---------------------
+})
+export class AppModule { }
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
