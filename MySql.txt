@@ -25,7 +25,7 @@ primary key(studid)
 );
 ----------------------------------------------------------------------------------
 6)to insert record
-INSERT INTO student1(NAME,address) VALUES('sandip','bangalore');
+INSERT INTO student1(name,address) VALUES('sandip','bangalore');
 insert into student1 values(101,'tarun','chennei');
 -----------------------------------------------------------------------------------
 7)to view the records 
@@ -33,6 +33,7 @@ select * from student;
 ------------------------------------------------------------
 8)update the record
 update student set address='Bangalore' where name='tarun';
+delete from student where  studid=1;
 --------------------------------------------------------------------------
 9)to create a view (view will not contain any data.it will contain only the query)
 create view stud as select studid,name from student;
