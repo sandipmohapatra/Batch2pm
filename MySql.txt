@@ -13,6 +13,10 @@ to drop database
 4)drop database cognizantstud;
 -----------------------------------------------------------------------
 to create a table
+create table student(rollno int,name varchar(30),address varchar(30));
+insert into student229 values(101,'Avijit','bangalore');
+select * from student229;
+--------------------------------------------------------------
 5)create table student1
 ( studid int not null auto_increment,
 name varchar(30) not null,
