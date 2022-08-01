@@ -128,3 +128,53 @@ location VARCHAR(30) DEFAULT NULL,
 PRIMARY KEY(studid,NAME)
 );
 -----------------------------------------------------------------
+Java database connectivity
+------------------------------------------------
+we are going connect database(mySql) with java.
+--------------------------------------------------------------------------
+java prg <-----> driver (translater) <------------->MySql
+(byte code)									(ASCII)
+---------------------------------------------------------------------------
+step 1:- we need to load the driver
+step 2:- we need to create the connection with the database
+step 3:- write the statement (create/insert/update/delete/select)
+step 4:- exceute the querry
+-----------------------------------------------------------------------------------------------
+example-1
+--------------------
+import java.sql.*;
+public class Create1 
+{
+public static void main(String[] args)throws Exception
+{
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/batch2pm","root","1234");
+	Statement st=con.createStatement();
+	st.execute("create table employee(empno int,name varchar(30),address varchar(30))");
+	System.out.println("table create");
+}
+}
+-------------------------------------------------------------------------------
+example-2
+---------------------
+import java.sql.*;
+public class Create1 
+{
+public static void main(String[] args)throws Exception
+{
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/batch2pm","root","1234");
+	Statement st=con.createStatement();
+	st.execute("insert into employee values(101,'sandip','hydarbad')");
+	System.out.println("row inserted");
+}
+}
+----------------------------------------------
+
+
+
+
+
+
+
+
