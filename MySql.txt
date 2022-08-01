@@ -224,6 +224,30 @@ public static void main(String[] args)throws Exception
 }
 }
 --------------------------------------------------------
+example-6
+------------------
+import java.sql.*;
+import java.util.*;
+public class Create1 
+{
+public static void main(String[] args)throws Exception
+{
+	Scanner ob=new Scanner(System.in);
+	System.out.println("Enter name,address and empno which you want to update");
+	String name=ob.next();
+	String address=ob.next();
+	int empno=ob.nextInt();
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/batch2pm","root","1234");
+	PreparedStatement st=con.prepareStatement("update employee set name=?,address=? where empno=?");
+	st.setString(1, name);
+	st.setString(2, address);
+	st.setInt(3, empno);
+	st.execute();
+	System.out.println("row updated");
+}
+}
+------------------------------------------------------------
 
 
 
