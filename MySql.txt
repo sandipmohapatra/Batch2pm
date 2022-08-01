@@ -248,7 +248,71 @@ public static void main(String[] args)throws Exception
 }
 }
 ------------------------------------------------------------
+springBoot
+---------------------
+example1
+--------------------
+package com.example.demo;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
+public class SpringBootExample2pm1Application {
+
+	public static void main(String[] args) {
+		ApplicationContext ac=SpringApplication.run(SpringBootExample2pm1Application.class, args);
+		Test1 xyz=ac.getBean("obj",Test1.class);
+		xyz.welcome();
+		System.out.println("the sum is "+xyz.sum(6, 7));
+		
+		Test2 pqr=ac.getBean("obj2",Test2.class);
+		System.out.println("the sub is "+pqr.sub(16, 7));
+		System.out.println("the mul is "+pqr.mul(16, 7));
+		System.out.println("the div is "+pqr.div(16, 7));
+		
+	}
+
+}
+-----------------------------------------------------------------------------------------
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+
+@Component("obj")
+public class Test1 {
+
+	public void welcome()
+	{
+		System.out.println("welcome to SpringBoot at 2pm Batch");
+	}
+	public int sum(int a,int b)
+	{
+		return a+b;
+	}
+}
+----------------------------------------------------------
+package com.example.demo;
+import org.springframework.stereotype.Component;
+@Component("obj2")
+public class Test2
+{
+public int sub(int a,int b)
+{
+	return a-b;
+}
+public int mul(int a,int b)
+{
+	return a*b;
+}
+public int div(int a,int b)
+{
+	return a/b;
+}
+
+}
+-------------------------------------------------------------------------------------------------
 
 
 
