@@ -314,7 +314,62 @@ public int div(int a,int b)
 }
 -------------------------------------------------------------------------------------------------
 
+example-2
+-----------------
+package com.example.demo;
 
+import org.springframework.stereotype.Component;
+
+@Component("obj3")
+public class Employee 
+{
+int empno;
+String name,address;
+public void input(int empno, String name, String address) {
+	this.empno = empno;
+	this.name = name;
+	this.address = address;
+}
+void display()
+{
+	System.out.println("the empno is "+empno);
+	System.out.println("the name is "+name);
+	System.out.println("the address is "+address);
+	}
+}
+----------------------------------------------------------------------------
+package com.example.demo;
+import java.util.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+@SpringBootApplication
+public class SpringBootExample2pm1Application {
+
+	public static void main(String[] args) {
+		ApplicationContext ac=SpringApplication.run(SpringBootExample2pm1Application.class, args);
+		Test1 xyz=ac.getBean("obj",Test1.class);
+		xyz.welcome();
+		System.out.println("the sum is "+xyz.sum(6, 7));
+		
+		Test2 pqr=ac.getBean("obj2",Test2.class);
+		System.out.println("the sub is "+pqr.sub(16, 7));
+		System.out.println("the mul is "+pqr.mul(16, 7));
+		System.out.println("the div is "+pqr.div(16, 7));
+		 
+		Employee abc=ac.getBean("obj3",Employee.class);
+		Scanner ob=new Scanner(System.in);
+		System.out.println("enter empno ,name,address");
+		int empno=ob.nextInt();
+		String name=ob.next();
+		String add=ob.next();
+		abc.input(empno, name, add);
+		abc.display();
+	}
+
+}
+-------------------------------------------------------------------------------------------------------------------
 
 
 
