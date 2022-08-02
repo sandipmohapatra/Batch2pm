@@ -373,7 +373,12 @@ public class SpringBootExample2pm1Application {
 We will call the class according to the order no
 ---------------------------------------------------------------------
 Interfaces :-
-1) CommandLineRunner :- it has a run method.This is auto readable method.The main class we read the method.
+1) CommandLineRunner :- it has a run method.This is auto readable/scanable method.The main class we read the method.
+@Component :-CommandLineRunner,Ordered
+@Repository:-
+@Service
+@Controller
+These are 4 auto component scan annotation type.
 public void run(String... args) throws Exception
 {
 }
@@ -469,6 +474,109 @@ public class Test3 implements CommandLineRunner,Ordered
 
 }
 --------------------------------------------------------------------
+wap to display your details
+1)addressDetails ------
+2)companyDetails---------
+3)EducationDetails------
+4)your details-----------
+----------------------------------------------
+1)yourDetails
+2)addressDeatils
+3)EducationDetails
+4)CompanyDetails
+--------------------------------------------------------------------
+JDBC
+-----------------
+java program:- 
+Class.forName("loading of driver");
+Connection con=DriverManager.getConnect("mysql:localhost/Batch2pm");
+PreparedStatement();
+execute();
+----------------------------------------------
+8.0.1--mysql version
+-------------------------
+oracle
+--------------
+mongodb
+--------------------
+SqlServer
+---------------------------------
+Hibernate
+---------------
+JPA ----Java persistance API(template)
+---------------------------------
+hibernateConfiguration.xml(connection part)
+student.hbm.xml(table part)
+-----------------------------------
+*don't have to compile
+we have to make change and save it.
+-----------------------------------------------------
+JPA---property file used in SpringBoot
+------------------------------------------------------------
+pom.xml
+-------------------batch2p
+<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.3</version>  <-----------------------------------------version
+		<relativePath/> 
+	</parent>
+<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+	
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.1</version>
+</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+---------------------------------------------------------------------------------------------
+
+parent version play a important role.
+The child will download as the compactable to the parent.
+----------------------------------------------------------------------------
+
+properties
+----------------------
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/batch2pm
+spring.datasource.username=root
+spring.datasource.password=1234
+------------------------------------------------------------
+
+package com.example.demo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+@Component
+public class Insert implements CommandLineRunner
+{
+	@Autowired
+	private JdbcTemplate jt;
+	@Override
+	public void run(String... args) throws Exception
+	{
+		String sql="insert into employee values(?,?,?)";
+		int x=jt.update(sql,109,"avijit","Orissa");
+		System.out.println("row inserted"+x);
+	}
+}
+
+//create table employee(empno int,name varchar(30),address varchar(30));
+-------------------------------------------------------------------------------------------------------
+
+
 
 
 
