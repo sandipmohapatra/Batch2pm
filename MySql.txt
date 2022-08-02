@@ -370,9 +370,105 @@ public class SpringBootExample2pm1Application {
 
 }
 -------------------------------------------------------------------------------------------------------------------
+We will call the class according to the order no
+---------------------------------------------------------------------
+Interfaces :-
+1) CommandLineRunner :- it has a run method.This is auto readable method.The main class we read the method.
+public void run(String... args) throws Exception
+{
+}
 
+2)Ordered:- according to the order it will execute the class.
+public int getOrder()
+{
+return <order no>
+}
+------------------------------------------------------------------------------------------
+Example-2
+---------------------
+package com.example.demo;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@SpringBootApplication
+public class SpringBootExample2pm2Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootExample2pm2Application.class, args);
+		System.out.println("This is a main class");
+	}
+
+}
+-----------------------------------------------------------------------------------
+package com.example.demo;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
+@Component
+public class Test1 implements CommandLineRunner,Ordered
+{
+
+	@Override
+	public int getOrder() {
+		
+		return 3;
+	}
+
+	@Override
+	public void run(String... args) throws Exception 
+	{
+	System.out.println("This file should run at 3rd position Test1");
+			}
+
+}
+-----------------------------------------------------------------------------
+package com.example.demo;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
+@Component
+public class Test2 implements CommandLineRunner,Ordered
+{
+	@Override
+	public int getOrder() {
+				return 1;
+	}
+
+	@Override
+	public void run(String... args) throws Exception 
+	{
+		System.out.println("This is test2 runing first");
+		
+	}
+
+}
+-----------------------------------------------------------
+package com.example.demo;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Test3 implements CommandLineRunner,Ordered
+{
+
+	@Override
+	public int getOrder() {
+		
+		return 2;
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		System.out.println("This class  will run second Test3");
+		
+	}
+
+}
+--------------------------------------------------------------------
 
 
 
