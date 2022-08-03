@@ -582,7 +582,6 @@ public class Insert implements CommandLineRunner,Ordered
 }
 
 //create table employee(empno int,name varchar(30),address varchar(30));
-//create table employee(empno int,name varchar(30),address varchar(30));
 -------------------------------------------------------------------------------------------------------
 package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -637,6 +636,164 @@ public class Delete implements CommandLineRunner,Ordered
 
 
 ----------------------------------------------------------------------------------------------------
+
+create a bank table(custaccno,name,address,balance)
+perform insert,update,delete in single program using springBootJPA.
+-------------------------------------------------Example-1------------------------------------------------------
+step 1:-create starter project
+step 2:- select war 
+step 3:-create a folder inside webapp---WEB-INF
+step 4:-create folder inside WEB-INF---views
+step 5:-create the .jsp files inside the views.
+----------------------------------------------------------------------------
+SpringBoot MVC
+-------------------------------
+First.jsp
+-------------------------
+<html>
+<body>
+ <h1><center>Employee Registration Page</center></h1>
+ <form action="register">
+ <table>
+<tr><td>Enter empno</td><td><input type="text" name=t1 size=20></td></tr>
+<tr><td>Enter name</td><td><input type="text" name=t2 size=20></td></tr>
+<tr><td>Enter address</td><td><input type="text" name=t3 size=20></td></tr>
+<tr><td></td><td><input type="submit" value="submit"></td></tr>
+ </table>
+ </form>
+ </body>
+ </html>
+--------------------------------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.2.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>SpringBootMVCexample-1</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>SpringBootMVCexample-1</name>
+	<description>sandip Spring Boot</description>
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.1</version>
+</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
+------------------------------------------------------------------------------
+controller
+---------------------
+package com.example.demo;
+import org.springframework.jdbc.core.JdbcTemplate;
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+@Controller
+public class TestController 
+{
+@Autowired
+private JdbcTemplate jt;
+private HttpServletRequest req;
+private HttpServletResponse res;
+
+@GetMapping("/show")
+public String showRegister()
+{
+	return "First";   <------First.jsp
+}
+@RequestMapping("/register")   <----- <form action="register">
+public String doRegistration(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException
+{
+	res.setContentType("text/html");
+	PrintWriter pw=res.getWriter();
+	String a=req.getParameter("t1");
+	String b=req.getParameter("t2");
+	String c=req.getParameter("t3");
+	String sql="insert into employee values(?,?,?)";
+	int count=jt.update(sql,a,b,c);
+	pw.println("row inserted"+count);
+		
+
+
+return "success";   <----success.jsp
+	
+}
+
+}
+-------------------------------------------------------------------
+server.port=8090
+
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/batch2pm
+spring.datasource.username=root
+spring.datasource.password=1234
+
+
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+---------------------------------------------------
+success.jsp
+----------------------
+<h1><center>Successfully Registered</center></h1>
+-----------------------------------------------------------
+browser :--- http://localhost:8090/show
+-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 
 
