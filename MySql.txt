@@ -784,7 +784,175 @@ success.jsp
 -----------------------------------------------------------
 browser :--- http://localhost:8090/show
 -----------------------------------------------------------------
-
+example-1
+-------------
+<html>
+<body>
+<h1><center>Employee Registration Page</center></h1><hr>
+<form action=Second.jsp>
+<table>
+<tr><td>Enter empno<td><input type=text name=t1 size=20></tr>
+<tr><td>Enter name<td><input type=text name=t2 size=20></tr>
+<tr><td>Enter address<td><input type=text name=t3 size=20></tr>
+<tr><td><td><input type=submit value=insert name=b1>
+<input type=submit value=update name=b1>
+<input type=submit value=delete name=b1>
+<input type=submit value=select name=b1>
+</tr>
+</table>
+</form>
+</body>
+</html>
+-----------------------------------------
+<%@page import="java.sql.*"%>
+<% String a =request.getParameter("t1");
+String b =request.getParameter("t2");
+String c =request.getParameter("t3");
+String but =request.getParameter("b1");
+%>
+<%
+try
+{
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/batch2pm","root","1234");
+	if(but.equals("insert"))
+	{
+		PreparedStatement ps=con.prepareStatement("insert into employee values(?,?,?)");
+		ps.setInt(1,Integer.parseInt(a));
+		ps.setString(2,b);
+		ps.setString(3,c);
+		ps.execute();
+		out.println("row inserted");
+	}
+	else if(but.equals("update"))
+	{
+		PreparedStatement ps=con.prepareStatement("update employee set name=?,address=? where empno=?");
+		ps.setString(1,b);
+		ps.setString(2,c);
+		ps.setInt(3,Integer.parseInt(a));
+		ps.execute();
+		out.println("row updated");
+	}
+else if(but.equals("delete"))
+	{
+		PreparedStatement ps=con.prepareStatement("delete from employee where empno=?");
+		ps.setInt(1,Integer.parseInt(a));
+		ps.execute();
+		out.println("row deleted");
+	}
+	else
+	{
+		PreparedStatement ps=con.prepareStatement("select *  from employee");
+		ResultSet rs=ps.executeQuery();
+		out.println("<h1><center>Employee Data</center></h1><hr>");
+		out.println("<table border=1 width='50%'>");
+		while(rs.next())
+		{
+			out.println("<tr><td>"+rs.getInt(1)+"<td>  "+rs.getString(2)+"<td>"+rs.getString(3)+"</tr>");
+		}
+		out.println("</table>");
+	}
+	}
+	catch(Exception ae)
+	{
+		ae.printStackTrace();
+	}
+	%>
+---------------------------------------------------------------------------------------
+servlet
+-------------------
+<html>
+<body>
+<h1><center>Employee Registration Page</center></h1><hr>
+<form action=Second>
+<table>
+<tr><td>Enter empno<td><input type=text name=t1 size=20></tr>
+<tr><td>Enter name<td><input type=text name=t2 size=20></tr>
+<tr><td>Enter address<td><input type=text name=t3 size=20></tr>
+<tr><td><td><input type=submit value=insert name=b1>
+<input type=submit value=update name=b1>
+<input type=submit value=delete name=b1>
+<input type=submit value=select name=b1>
+</tr>
+</table>
+</form>
+</body>
+</html>
+------------------------------------------------------------------
+import java.io.*;
+import java.sql.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+@WebServlet("/Second")
+public class Second extends HttpServlet 
+{
+	public void init()
+	{
+		System.out.println("init");
+	}
+	public void service(HttpServletRequest req,HttpServletResponse res)throws ServletException,IOException 
+	{
+		res.setContentType("text/html");
+		PrintWriter out=res.getWriter();
+		String a =req.getParameter("t1");
+		String b =req.getParameter("t2");
+		String c =req.getParameter("t3");
+		String but =req.getParameter("b1");
+			try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/batch2pm","root","1234");
+			if(but.equals("insert"))
+			{
+				PreparedStatement ps=con.prepareStatement("insert into employee values(?,?,?)");
+				ps.setInt(1,Integer.parseInt(a));
+				ps.setString(2,b);
+				ps.setString(3,c);
+				ps.execute();
+				out.println("row inserted");
+			}
+			else if(but.equals("update"))
+			{
+				PreparedStatement ps=con.prepareStatement("update employee set name=?,address=? where empno=?");
+				ps.setString(1,b);
+				ps.setString(2,c);
+				ps.setInt(3,Integer.parseInt(a));
+				ps.execute();
+				out.println("row updated");
+			}
+		else if(but.equals("delete"))
+			{
+				PreparedStatement ps=con.prepareStatement("delete from employee where empno=?");
+				ps.setInt(1,Integer.parseInt(a));
+				ps.execute();
+				out.println("row deleted");
+			}
+			else
+			{
+				PreparedStatement ps=con.prepareStatement("select *  from employee");
+				ResultSet rs=ps.executeQuery();
+				out.println("<h1><center>Employee Data</center></h1><hr>");
+				out.println("<table border=1 width='50%'>");
+				while(rs.next())
+				{
+					out.println("<tr><td>"+rs.getInt(1)+"<td>  "+rs.getString(2)+"<td>"+rs.getString(3)+"</tr>");
+				}
+				out.println("</table>");
+			}
+			}
+			catch(Exception ae)
+			{
+				ae.printStackTrace();
+			}
+			
+	}
+	public void destroy()
+	{
+		System.out.println("destroy");
+	}
+}	
+----------------------------------------------------------------------------------------
 
 
 
