@@ -495,7 +495,10 @@ import { Multiplierpipe } from './multiplier/multiplier.pipe';
 export class AppModule { }
 
 ----------------------------------------------------------------------------------------------
-
+Example-2
+---------------------------
+pipe2component.ts
+---------------------------------
 import {Pipe,PipeTransform} from '@angular/core';
 @Pipe({name: 'sentencecase'})
 
@@ -510,6 +513,8 @@ export class SentenceCase implements PipeTransform
     }
 }
 -------------------------------------------------------------------------------------
+sentencecase.ts
+-----------------------------------
 import { Component } from '@angular/core';
 @Component({
   selector: 'app-multiplier',
@@ -521,6 +526,11 @@ export class MultiplierComponent
 public msg='welcome to Angular 10';
    }
 -----------------------------------------------------------------------
+pipe2component.html
+----------------------------------------
+<p> {{msg | sentencecase}}</p>
+
+<p> {{msg1 | sentencecase}}</p>
 ----------------------------------------------------------------------------------------------
 service contain methods which can be accessed by other modules.
 methods can applicable for the same module.
