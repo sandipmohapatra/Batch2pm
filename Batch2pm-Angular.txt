@@ -337,7 +337,470 @@ export class LikeDemoComponent {
 </div>
 </div>
 -----------------------------------------------------------------------------------------------------------------------
+Angular Pipe
+---------------------------
+1)Pipe is used to transform data.
+2)Data may come to angular from various source so the data type of source provider and datatype of the typescript will not match.so it will not display in proper format .so pipe will transform the data and display in desired format.
+3)pipes are used for formatting and filtering the data.
+4)All pipes are derived from 'PipeTransform' .
+5)import {PipeTransform} from '@angular/core'
+6)we have some pre-defined pipes and we can also create custom pipes.
+7)Every pipe is defined with a pipe name,which is configured using "@Pipe()".
+@Pipe({name:"uppercase"})
+8)Every pipe implements  "PipeTransform" and use the transform() method.
+export class Uppercase implements PipeTransform
+{
+transform(value)
+{ return value;}}
+-----------------------------------------------------------------
+example :1
+----------------------
+app.component.ts file.
+-------------------------------------------
+import { Component } from '@angular/core';
+@Component ({ 
+   selector: 'my-app', 
+   templateUrl: 'app/app.component.html' 
+}) 
+export class AppComponent { 
+   TutorialName: string = 'Angular JS'; 
+   appList: string[] = ["Binding", "Display", "Services"]; 
+} 
+-----------------------------------------------------------------------
+app.component.html file.
+-------------------------------------------------------------------------
+<div> 
+   The name of this Tutorial is {{TutorialName}}<br>  
+   The first Topic is {{appList[0] | uppercase }}<br> 
+   The second Topic is {{appList[1] | uppercase }}<br> 
+   The third Topic is {{appList[2]| uppercase }}<br> 
+</div>
 
+----------------------------------------------------------------------------------------
+Example :-
+Pre-defined Pipes
+-----------------------------------
+import { Component } from '@angular/core';
+@Component({
+  selector: 'app-pipeexample1',
+  templateUrl: './pipeexample1.component.html',
+  styleUrls: ['./pipeexample1.component.css']
+})
+export class Pipeexample1Component  
+{
+  TutorialName: string = 'Angular JS'; 
+  appList: string[] = ["Binding data", "Display device", "Services oriented"]; 
+public product = {
+  Name:'Samsung TV',
+  Price:45000.50,
+  Mfd:new Date('2021-02-02')
+}}
+---------------------------------------------------------------------------------------------
+<div> 
+    The name of this Tutorial is {{TutorialName}}<br>  
+    The first Topic is {{appList[0] | titlecase }}<br> 
+    The second Topic is {{appList[1] | titlecase }}<br> 
+    The third Topic is {{appList[2]| titlecase }}<br> 
+    The product name is {{product.Name | titlecase}}<br>
+    The product price is {{product.Price}}<br>
+    The product price is {{product.Price|number}}<br>
+    The product price is {{product.Price|currency}}<br>
+    The product price is {{product.Price|currency:'INR'}}<br>
+    The product price is {{product.Price|currency:'&#8377;'}}<br>
+    The product date is {{product.Mfd|date:'MMM-dd-yyyy'}}<br>
+    The product date is {{product.Mfd|date:'shortDate'}}<br>
+    The product Date is {{product|json}}<br/>    
+    The Canadian dollar {{1234567 | currency:'CAD':'symbol' :'1.2-5'}}<br>
+    The first Topic is {{appList[0] | slice:1:2}}<br> 
+    The second Topic is {{appList[1] | slice:1:3}}<br> 
+   The third Topic is {{appList[2]| slice:2:3}}<br> 
+    
+ </div>
+
+-----------------------------------------------------------------------------------------
+Angular  also has the facility to create custom pipes. The general way to define a custom pipe is as follows.
+syntax:-
+----------------
+import { Pipe, PipeTransform } from '@angular/core';  
+@Pipe({name: 'Pipename'}) 
+
+export class Pipeclass implements PipeTransform 
+{ 
+   transform(parameters): returntype 
+{ } 
+} 
+--------------------------------------------------------------------------------------
+Where,
+
+'Pipename' - This is the name of the pipe.
+
+Pipeclass - This is name of the class assigned to the custom pipe.
+
+Transform - This is the function to work with the pipe.
+
+Parameters - This are the parameters which are passed to the pipe.
+
+Returntype - This is the return type of the pipe.
+----------------------------------------------------------------------------------
+step-1)create folder multiplier
+step-2)
+--------------------------------------------------------------
+multiplier.component.ts
+---------------------------------------------------------------------
+import {Component} from '@angular/core';
+@Component ({
+  selector: 'app-multiplier',
+  template:`
+  <p>Multiplier {{5 | Multiplier: 20}}</p> <br />
+  
+  <p>Multiplier {{2 | Multiplier: 20}}</p> <br />
+  
+  <p>Multiplier {{4 | Multiplier: 20}}</p> <br />
+   `
+})
+export class MultiplierComponent
+{}
+-----------------------------------------------------------------------------------
+step 3) create a file inside multiplier folder
+-----------------------------------------------------------
+multiplier.pipe.ts (new pipe is defined) //this custom pipe have to be separate
+--------------------------------------------------------------
+import {Pipe,PipeTransform} from '@angular/core';
+
+@Pipe({name: 'Multiplier'})
+
+export class Multiplierpipe implements PipeTransform
+{
+    transform(value:number, multiply: number):number
+    {
+        return multiply * value
+    }
+}
+
+--------------------------------------------------------------------------------------
+app.module.ts
+----------------------------------------------------------------------------------------
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppComponent }  from './app.component';
+import {FormsModule} from  '@angular/forms';
+import { Multiplierpipe } from './multiplier/multiplier.pipe';
+
+@NgModule({
+  imports:      [ BrowserModule],
+  declarations: [ AppComponent ,Multiplierpipe],
+  bootstrap:    [ MultiplierComponent ]
+})
+export class AppModule { }
+
+----------------------------------------------------------------------------------------------
+
+import {Pipe,PipeTransform} from '@angular/core';
+@Pipe({name: 'sentencecase'})
+
+export class SentenceCase implements PipeTransform
+{
+    transform(str)
+    {
+        let firstChar=str.charAt(0);
+        let restChars=str.substring(1);
+        let sentence=firstChar.toUpperCase()+restChars.toLowerCase();
+        return sentence;
+    }
+}
+-------------------------------------------------------------------------------------
+import { Component } from '@angular/core';
+@Component({
+  selector: 'app-multiplier',
+ templateUrl:'multiplier.component.html'
+   
+ })
+export class MultiplierComponent 
+ {
+public msg='welcome to Angular 10';
+   }
+-----------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
+service contain methods which can be accessed by other modules.
+methods can applicable for the same module.
+----------------------------------------------------------------------------------------------
+import { FormsModule } from '@angular/forms';
+import FormsModule
+-------------------------------------------
+Angular + SpringBoot Project
+---------------------------------------------
+modules of Angular project
+1)student-all
+i)ngOnInit(): void {    this.getAllStudents();  }
+ii)getAllStudents(){}
+iii)deleteStudent(id: number) {}
+iv)editStudent(id: number) {}
+------------------------------------------------------------------------------------------------
+2)student-create
+a)student.create.component.html ----[(ngModel)]----it takes input from the keyboard and store in the data.
+b)student.create.component.ts
+i)constructor(private service: StudentService)
+ii)ngOnInit(): void {this.student = new Student(); }
+iii)createStudent() {read the data,clear the form for new Data}
+---------------------------------------------------------------------------------------------------
+3)student-edit
+i)student-edit.component.ts
+---ngOnInit(): void{this.activatedRouter.snapshort.param['id'];
+---this.service.getOneStudent(this.id).subscribe(data => this.student=data;}
+ii)updateStudent() {}
+------------------------------------------------------------------------------------------------------------------------
+iii)student-edit.component.html
+same as student.create.component.html but it fetches the data from the backend;
+iv)<form (ngSubmit)='updateStudent()'>
+-------------------------------------------------
+4)app.component.ts
+starting point----selector: 'app-root',
+bootstrap: [AppComponent]
+------------------------------------------------
+5)app.component.html
+menubar
+---------------------------------------
+6)student.ts
+-----------------------------------------------------
+export class Student
+{
+id:number;
+name:string;
+fee:number;
+course:string;
+email:string;
+addr:string;
+}
+--------------------------------------------------------------------------
+7)student.service.ts
+------------------------------------------
+import  {Injectable} from '@angular/core';
+import  {HttpClient} from '@angular/common/http';
+import  {Observable} from 'rxjs';
+import  {Student} from './student';
+@Injectable({
+providedIn:'root'
+})
+-----------------------------------------
+An Observable is a stream of event or data .
+It return 
+http.get('http://localhost:8090/rest/student/all');
+http.put('http://localhost:8090/rest/student/modify/id');
+http.delete('http://localhost:8090/rest/student/delete/id');
+http.post('http://localhost:8090/rest/student/save/');
+----------------------------------------------------------------------
+getAllStudents(): Observable<Student[]> return {http.get('http://localhost:8090/rest/student/all');}
+---------------------------------------------------------------------------
+deleteOneStudent(id: number): Observable<any> {http.delete('http://localhost:8090/rest/student/delete/id');}
+------------------------------------------------------------------------------
+createStudent(student: Student): Observable<any> {http.post('http://localhost:8090/rest/student/save/');}
+------------------------------------------------------------------------------------------------
+updateStudent(id: number, student: Student): Observable<any>{http.put('http://localhost:8090/rest/student/modify/id');}
+----------------------------------------------------------------------------------------------------------------------
+
+subscribing:- kicks off the Observable stream.without a subscribe the stream won't start emitting values.
+---------------------------------------------------------------------------------------------------------------------------------------
+
+springBoot:-RestEndPoint
+---------------------------------------------
+1)@RestController
+2)@RequestMapping("/rest/student")
+3)@CrossOrigin(origins = "http://localhost:4200")
+--------------------------------------------------------------------------
+4)@PostMapping("/save")
+--------------------------------------------------
+5)@GetMapping("/all")
+-------------------------------------------------------
+6)@DeleteMapping("/remove/{id}")
+-------------------------------------------------------------
+7)@PutMapping("/modify/{id}")
+--------------------------------------------------------------------------
+
+
+--------------------------oooooooooooo------------------------------------------------------------------
+HTTP status are the data send from the backend to frontend
+----------------------------------------------------------------------------------------------------------------
+String body = "Student '"+id+"' created";
+1)resp =  new ResponseEntity<String>(body,HttpStatus.CREATED); //201
+-----------------------------------------------------------------------------------------------------------------------------------------------
+2)resp =  new ResponseEntity<String>("Unable to Create Student",HttpStatus.INTERNAL_SERVER_ERROR); //500
+------------------------------------------------------------------------------------------------------------------------------
+List<Student> list = service.getAllStudents();
+			if(list!=null && !list.isEmpty()) {
+				log.info("Data is not empty=>"+list.size());
+				list.sort((s1,s2)->s1.getName().compareTo(s2.getName()));
+3)resp = new ResponseEntity<List<Student>>(list, HttpStatus.OK);//200
+---------------------------------------------------------------------------------------------------------------------------------------------
+boolean exist = service.isStudentExist(id);
+			if(exist) {
+				service.deleteStudent(id);
+4)resp = new ResponseEntity<String>("Student '"+id+"' not exist",HttpStatus.BAD_REQUEST);//401
+----------------------------------------------------------------------------------------------------------------------------
+
+
+
+Angular+springBoot+SpringBoot JPA+Rest API
+------------------------------------------------------------------------------
+create a application for employee
+
+empid
+name
+address
+salary
+designation
+email
+phoneno
+---------------------------------------------------------------------------------------------
+services
+-----------------------------
+Angular Service:- It is used for creating user-defined business logic which can be reused in the application by injecting into any component.
+---------------------------------------------------
+Differece between service and function
+-----------------------------------------------------------
+function is used for a single application or within the folder or project.
+
+service is used for any component for any project or folder not for single application.
+------------------------------------------------------------------------------------------------------------------------------------
+step 1:- we will create a service in a separte folder.
+step 2:- we will inject it to a component and use it.
+
+1)import {Injectable} from '@angular/core'
+2)@Injectable()
+3)providedIn:'root'
+----------------------------------------------------------------------------------
+calc.service.ts (create this inside the app folder)
+----------------------------
+import { Injectable } from "@angular/core";
+@Injectable({
+providedIn:'root'
+})
+
+export class CalcService
+{
+    public add(...params:number[]):number
+    {
+        let result = 0;
+        for(let val of params)
+        {
+            result += val;
+        }
+        return result;
+    }
+}
+------------------------------------------------------------------------------
+ng g c calcService
+--------------------------------
+import { Component, OnInit } from '@angular/core';
+import { CalcService } from '../calc.service';
+@Component({
+  selector: 'app-calc-service',
+  templateUrl: './calc-service.component.html',
+  })
+export class CalcServiceComponent {
+sum: number=0;
+
+constructor(calc:CalcService)
+  {
+    this.sum=calc.add(5,6,7,8);
+    console.log("The sum is "+this.sum);
+  }
+}
+-----------------------------------------------------------------------------------
+app.module.ts
+---------------------------
+import { CalcServiceComponent } from './calc-service/calc-service.component';
+import { CalcService } from './calc.service';
+
+ providers: [CalcService],
+  bootstrap: [ CalcServiceComponent ]
+----------------------------------------------------------------------------------------------------------------------------
+example-2
+---------------------
+import { Injectable } from "@angular/core";
+@Injectable({
+providedIn:'root'
+})
+
+export class CaptchaService
+{
+    public GenerateCode()
+    {
+        let a =Math.random()*10;
+        let b =Math.random()*10;
+        let c =Math.random()*10;
+        let d =Math.random()*10;
+        let e =Math.random()*10;
+        let f =Math.random()*10;
+let code =`${Math.round(a)} ${Math.round(b)} ${Math.round(c)} ${Math.round(d)} ${Math.round(e)} 
+${Math.round(f)} `;
+return code;
+    }
+}
+--------------------------------------------------------------
+LoginComponent.ts
+-------------------------------------------
+import { Component, OnInit } from '@angular/core';
+import { CaptchaService } from '../capcha';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent  {
+
+constructor(private captcha : CaptchaService){}
+public code=this.captcha.GenerateCode();
+
+public refreshClick()
+{
+  this.code=this.captcha.GenerateCode();
+}
+
+}
+------------------------------------------------------------------
+login.component.html
+---------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="form-group">
+        <label>User Name</label>
+        <div>
+            <input type="text" class="form-control">
+        </div>
+       </div>
+       <div class="form-group">
+        <label>Password</label>
+        <div>
+            <input type="password" class="form-control">
+        </div>
+       </div>
+       <div class="form-group">
+          <label>Verify Code</label>
+          <div>
+              {{code}} <button (click)="refreshClick()" class="btn"><span class="fa fa-sync"></span>Refresh</button>
+          </div>
+          <div>
+              <input type="text" class="form-control">
+          </div>
+       </div>
+       <div class="form-group">
+          <button class="btn btn-primary btn-block">Login</button>
+       </div>
+      </div>
+--------------------------------------------------------------------------------------------------
 
 
 
